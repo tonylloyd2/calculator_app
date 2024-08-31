@@ -101,8 +101,8 @@ class _CalculatorHomeState extends State<CalculatorHome> {
     });
   }
 
-  // Function to build each button
-  Widget buildButton(String buttonText, {Color color = Colors.black}) {
+  // Function to build each button with optional icon
+  Widget buildButton(String buttonText, {Color color = Colors.black, String? assetPath}) {
     return Expanded(
       child: OutlinedButton(
         onPressed: () {
@@ -110,10 +110,12 @@ class _CalculatorHomeState extends State<CalculatorHome> {
         },
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text(
-            buttonText,
-            style: TextStyle(fontSize: 20.0, color: color),
-          ),
+          child: assetPath != null 
+            ? Image.asset(assetPath, width: 24, height: 24)
+            : Text(
+                buttonText,
+                style: TextStyle(fontSize: 20.0, color: color),
+              ),
         ),
       ),
     );
@@ -176,18 +178,18 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                 ),
               ),
               Divider(),
-              // Row for Clear and Backspace
+              // Row for Clear and Backspace with icons
               Row(
                 children: [
-                  buildButton("CLEAR", color: Colors.red),
-                  buildButton("⌫", color: Colors.red),
+                  buildButton("CLEAR", color: Colors.red, assetPath: 'assets/icons/48by28.jpg'),
+                  buildButton("⌫", color: Colors.red, assetPath: 'assets/icons/72by72.jpg'),
                 ],
               ),
               // Rows for digits and operators
               Row(
                 children: [
-                  buildButton("("),
-                  buildButton(")"),
+                  buildButton("(", assetPath: 'assets/icons/96by96.jpg'),
+                  buildButton(")", assetPath: 'assets/icons/144by144.jpg'),
                   buildButton("^"),
                   buildButton("/"),
                 ],
